@@ -7,12 +7,12 @@ function App() {
   const datos = {
     nombreDifunto: "María Pérez García",
     mensaje: "A un mes de su partida, agradecemos a Dios por su vida e invitamos a la misa de honras para orar por su eterno descanso.",
-    fecha: "Sábado, 14 de Diciembre",
+    fecha: "Domingo, 15 de Diciembre",
     hora: "6:00 PM",
-    lugar: "Catedral de Lima",
-    direccion: "Jirón Carabaya, Cercado de Lima",
-    mapaUrl: "https://goo.gl/maps/LinkRealCatedralLima",
-    whatsapp: "51922982880",
+    lugar: "Basílica Catedral de Lima",
+    direccion: "Plaza de Armas de Lima, Jirón Carabaya, Lima 15001",
+    mapaUrl: "https://maps.app.goo.gl/X77E7uXdKmkZoXDH8",
+    whatsapp: "51922809482",
     fotoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=688&auto=format&fit=crop", 
     citaBiblica: "Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. (Juan 11:25)"
   };
@@ -90,7 +90,8 @@ function App() {
           </div>
 
           {/* --- TARJETA DE DETALLES (Bordes Dorados Finos) --- */}
-          <div className="w-full bg-slate-900/40 backdrop-blur-sm border border-amber-500/20 p-6 rounded-xl relative shadow-2xl">
+          <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] ring-1 ring-white/5 relative overflow-hidden group">
+             <div className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-all duration-700 group-hover:left-[100%]"></div>
              {/* Esquinas doradas decorativas */}
              <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-amber-500/60 rounded-tl-sm"></div>
              <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-amber-500/60 rounded-tr-sm"></div>
