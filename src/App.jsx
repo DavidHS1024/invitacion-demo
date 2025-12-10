@@ -5,118 +5,146 @@ function App() {
   // 1. CONFIGURACIÓN DE DATOS
   // ----------------------------------------------------
   const datos = {
-    nombreDifunto: "María Pérez García", 
+    nombreDifunto: "María Pérez García",
     mensaje: "A un mes de su partida, agradecemos a Dios por su vida e invitamos a la misa de honras para orar por su eterno descanso.",
     fecha: "Sábado, 14 de Diciembre",
     hora: "6:00 PM",
-    lugar: "Parroquia San Francisco de Asís",
-    direccion: "Av. Principal 123, Lima",
-    // Busca la iglesia en Google Maps y pega el link aquí
-    mapaUrl: "https://goo.gl/maps/ejemplo", 
-    // Tu número con código 51
-    whatsapp: "51999999999", 
-    // Foto de ejemplo (Reemplázala por la real)
+    lugar: "Catedral de Lima",
+    direccion: "Jirón Carabaya, Cercado de Lima",
+    mapaUrl: "https://goo.gl/maps/LinkRealCatedralLima",
+    whatsapp: "51922982880",
     fotoUrl: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=688&auto=format&fit=crop", 
     citaBiblica: "Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. (Juan 11:25)"
   };
 
-  // ----------------------------------------------------
-  // 2. ANIMACIONES
-  // ----------------------------------------------------
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    setVisible(true); // Activa la animación al cargar
+    setVisible(true);
   }, []);
 
   return (
-    // FONDO OSCURO ELEGANTE (Slate-950 es un negro suave, no agresivo)
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-900 selection:text-white overflow-x-hidden">
+    // IMPORTANTE: Definimos las fuentes aquí mismo para no tocar el HTML
+    <div className="min-h-screen bg-black text-slate-200 overflow-x-hidden relative font-sans selection:bg-amber-900 selection:text-white">
       
-      {/* Contenedor Principal (Efecto Móvil) */}
+      {/* Importamos las fuentes de Google: Great Vibes (Cursiva) y Cinzel (Romana) */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap');
+      `}</style>
+
+      {/* --- FONDO DEGRADADO NOCTURNO --- */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-neutral-900 via-black to-black z-0"></div>
+
+      {/* --- PARTÍCULAS DORADAS (Efecto Polvo de Oro) --- */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          <div className="absolute bottom-0 left-1/4 w-0.5 h-0.5 bg-amber-200/40 rounded-full animate-[ping_5s_linear_infinite]"></div>
+          <div className="absolute top-1/2 left-2/3 w-1 h-1 bg-amber-500/20 rounded-full animate-[pulse_4s_ease-in-out_infinite]"></div>
+          <div className="absolute top-10 right-10 w-0.5 h-0.5 bg-white/30 rounded-full animate-[ping_8s_linear_infinite]"></div>
+      </div>
+
+      {/* Contenedor Principal */}
       <div className={`
-        max-w-md mx-auto min-h-screen flex flex-col relative
+        relative z-10 max-w-md mx-auto min-h-screen flex flex-col
         transition-all duration-1000 ease-out
         ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
       `}>
-        
-        {/* --- SECCIÓN FOTO --- */}
-        <div className="relative h-[55vh] w-full">
-           {/* Imagen con filtro blanco y negro (grayscale) */}
-          <img 
-            src={datos.fotoUrl} 
-            alt="Foto" 
-            className="w-full h-full object-cover grayscale opacity-80"
+
+        {/* --- FOTO SUPERIOR (Marco Sutil) --- */}
+        <div className="relative h-[45vh] w-full group">
+          <div className="absolute inset-0 bg-black/20 z-10"></div>
+          <img
+            src={datos.fotoUrl}
+            alt="Foto"
+            className="w-full h-full object-cover grayscale opacity-90 transition-transform duration-[10s] ease-in-out scale-100 group-hover:scale-105"
+            onError={(e) => {e.target.src = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=688&auto=format&fit=crop'}}
           />
-          {/* Degradado Mágico: Hace que la foto se funda con el fondo negro */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/40 to-slate-950"></div>
+          {/* Degradado inferior para integrar con el negro */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent z-20"></div>
         </div>
 
-        {/* --- SECCIÓN CONTENIDO (Superpuesto) --- */}
-        <div className="relative -mt-32 px-8 pb-12 flex-1 flex flex-col items-center text-center space-y-6">
-          
-          {/* Cruz con brillo dorado tenue */}
-          <div className="text-amber-500/80 animate-pulse">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M7 8h10"/></svg>
+        {/* --- CONTENIDO --- */}
+        <div className="relative -mt-32 px-8 pb-12 flex-1 flex flex-col items-center text-center space-y-8 z-30">
+
+          {/* Icono Cruz Fina */}
+          <div className="text-amber-500/80 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1"><path d="M12 2v20M7 8h10"/></svg>
           </div>
 
           {/* Títulos */}
           <div className="space-y-2">
-            <p className="text-xs tracking-[0.3em] uppercase text-slate-400 font-medium">Misa de Honras</p>
-            <h1 className="text-4xl font-serif text-white font-medium drop-shadow-2xl">
+            <p className="text-xs tracking-[0.3em] uppercase text-amber-500/70 font-[Cinzel]">Misa de Honras</p>
+            
+            {/* NOMBRE: Fuente Cursiva 'Great Vibes' */}
+            <h1 className="text-6xl text-white font-['Great_Vibes'] drop-shadow-lg py-2 bg-gradient-to-br from-amber-100 via-amber-400 to-amber-700 bg-clip-text text-transparent">
               {datos.nombreDifunto}
             </h1>
           </div>
 
-          {/* Línea divisora elegante */}
-          <div className="w-12 h-px bg-slate-800"></div>
-
           {/* Mensaje */}
-          <p className="text-slate-400 font-light leading-relaxed text-sm max-w-xs mx-auto">
-            {datos.mensaje}
-          </p>
+          <div className="relative">
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-px bg-amber-900/50"></div>
+            <p className="text-slate-300 font-['Montserrat'] font-light italic leading-relaxed text-sm max-w-xs mx-auto">
+              "{datos.mensaje}"
+            </p>
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-8 h-px bg-amber-900/50"></div>
+          </div>
 
-          {/* --- TARJETA DE FECHA (Cristal Frosted) --- */}
-          <div className="w-full bg-slate-900/50 backdrop-blur-sm border border-slate-800/60 p-6 rounded-xl space-y-4 hover:border-amber-900/30 transition-colors duration-500 shadow-2xl">
-             <div className="flex flex-col gap-1">
-                <span className="text-amber-500/90 text-lg font-medium">📅 {datos.fecha}</span>
-                <span className="text-3xl font-light text-white tracking-tight">{datos.hora}</span>
-             </div>
-             {/* Separador punteado */}
-             <div className="border-t border-dashed border-slate-800 w-full my-2"></div>
-             <div>
-                <p className="font-medium text-slate-200">{datos.lugar}</p>
-                <p className="text-xs text-slate-500 mt-1">{datos.direccion}</p>
+          {/* --- TARJETA DE DETALLES (Bordes Dorados Finos) --- */}
+          <div className="w-full bg-slate-900/40 backdrop-blur-sm border border-amber-500/20 p-6 rounded-xl relative shadow-2xl">
+             {/* Esquinas doradas decorativas */}
+             <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-amber-500/60 rounded-tl-sm"></div>
+             <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-amber-500/60 rounded-tr-sm"></div>
+             <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-amber-500/60 rounded-bl-sm"></div>
+             <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-amber-500/60 rounded-br-sm"></div>
+
+             <div className="space-y-4">
+               <div>
+                  <p className="text-amber-500 text-sm font-[Cinzel] font-semibold uppercase tracking-wider">Fecha & Hora</p>
+                  <p className="text-2xl text-white font-['Montserrat'] font-light">{datos.fecha}</p>
+                  <p className="text-xl text-white font-['Montserrat'] font-light">{datos.hora}</p>
+               </div>
+               <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-900/50 to-transparent"></div>
+               <div>
+                  <p className="text-amber-500 text-sm font-[Cinzel] font-semibold uppercase tracking-wider">Lugar</p>
+                  <p className="text-white font-['Montserrat']">{datos.lugar}</p>
+                  <p className="text-xs text-slate-500 font-['Montserrat']">{datos.direccion}</p>
+               </div>
              </div>
           </div>
 
-          {/* --- BOTONES DE ACCIÓN --- */}
-          <div className="w-full space-y-3 pt-4">
+          {/* --- BOTONES ELEGANTES (Rectangulares y Dorados) --- */}
+          <div className="w-full space-y-4 pt-2">
             
-            {/* Botón Mapa (Estilo Outline/Borde) */}
+            {/* Botón Mapa */}
             <a 
               href={datos.mapaUrl}
-              target="_blank"
+              target="_blank" 
               rel="noreferrer"
-              className="group flex items-center justify-center gap-3 w-full py-3.5 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white hover:border-slate-500 transition-all active:scale-95"
+              className="group relative flex items-center justify-center gap-3 w-full py-3.5 px-6 bg-transparent border border-amber-600/30 rounded-lg hover:border-amber-500 hover:bg-amber-950/30 transition-all duration-500 active:scale-[0.98]"
             >
-              <span>📍</span>
-              <span className="text-xs font-bold tracking-widest uppercase">Ver Ubicación</span>
+              <span className="text-amber-500">📍</span>
+              <span className="text-xs font-[Cinzel] font-bold tracking-widest text-amber-100 uppercase group-hover:text-white transition-colors">
+                Ver Ubicación
+              </span>
             </a>
 
-            {/* Botón WhatsApp (Estilo Sólido Resaltado) */}
+            {/* Botón WhatsApp (Estilo Premium Gold) */}
             <a 
-              href={`https://wa.me/${datos.whatsapp}?text=Hola, confirmo mi asistencia a la misa de honras.`}
-              target="_blank"
+              href={`https://wa.me/${datos.whatsapp}?text=Hola, confirmo mi asistencia.`} 
+              target="_blank" 
               rel="noreferrer"
-              className="flex items-center justify-center gap-3 w-full py-3.5 rounded-lg bg-slate-100 text-slate-950 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all active:scale-95 duration-300"
+              className="relative flex items-center justify-center gap-3 w-full py-4 px-6 bg-gradient-to-r from-amber-700 to-amber-900 rounded-lg shadow-[0_4px_20px_rgba(180,83,9,0.2)] hover:shadow-[0_4px_25px_rgba(245,158,11,0.3)] hover:to-amber-800 transition-all duration-500 active:scale-[0.98] border border-amber-500/20"
             >
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-emerald-700"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.97 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.05 20.15Z"/></svg>
-              <span className="text-xs font-bold tracking-widest uppercase">Confirmar Asistencia</span>
+              <div className="absolute inset-0 bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-amber-100"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.83 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.05 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.97 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.05 20.15Z"/></svg>
+              <span className="text-xs font-[Cinzel] font-bold tracking-widest text-white uppercase">
+                Confirmar Asistencia
+              </span>
             </a>
+
           </div>
 
-          <p className="text-[10px] text-slate-600 italic mt-8 font-serif opacity-50">
+          <p className="text-[10px] text-slate-500 italic mt-8 font-serif opacity-50 pb-8">
             {datos.citaBiblica}
           </p>
 
